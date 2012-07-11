@@ -11,11 +11,21 @@ class EmailManager
   def initialize(array)   # Get array from Craigslist_query
     @craigslist_array = array
     @database_array = DatabaseInterface.read
+    @body = "Hi, I'm really interested in your listing."
     # process_emails
   end
 
  def process_emails
- end
+   @craigslist_array.each do |listing|
+     #check whether list.url is already in @database_array
+      DatabaseInterface.write(listing)
+      EmailSender.send(listing, body)
+    else
+      #do nothing
+
+ end #end process_emails
+
+
 # database_array = DatabaseInterface.read
 # Go through each listing in the array and
 # check against the database if listing is a duplicate.

@@ -18,9 +18,9 @@ module EmailSender
       subject   "Interested in #{listing.title}"
          body   body
     end
-    mail.deliver
-    puts mail.to_s
-
+    if mail.deliver
+      return :success
+    end
 
   end
 
@@ -28,4 +28,4 @@ end
 
 
 
-# EmailSender.send(Listing.new("2br/2bath", "url", "felixtsai@yahoo.com", "hi"), "hi Felix")
+EmailSender.send(Listing.new("2br/2bath", "url", "felixtsai@yahoo.com", "hi"), "hi Felix")
