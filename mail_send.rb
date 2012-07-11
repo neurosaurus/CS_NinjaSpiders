@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'mail'
 
+
+
  Mail.defaults do
   delivery_method :sendmail
 end

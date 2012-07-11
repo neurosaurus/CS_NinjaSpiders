@@ -4,21 +4,19 @@ require 'mail'
 
 module EmailSender
 
-  def self.send(array, body)
-    all_listings = array
-    body = body
-    from_email = "lachy@devbootcamp.com"
-    from_name = "Lachy Groom"
+  def self.send(listing, body)
+    from_email = "dbctestingemail@gmail.com"
+    from_name = "DBC"
 
     Mail.defaults do
       delivery_method :sendmail
     end
 
     mail = Mail.new do
-      from from_email
-      to email
-    subject 'interested in #{title}'
-      body body
+         from   from_email
+           to   listing.email
+      subject   "Interested in #{listing.title}"
+         body   body
     end
     mail.deliver
     puts mail.to_s
@@ -26,7 +24,8 @@ module EmailSender
 
   end
 
-
-
-
 end
+
+
+
+EmailSender.send(Listing.new("2br/2bath", "url", "felixtsai@yahoo.com", "hi"), "hi Felix")

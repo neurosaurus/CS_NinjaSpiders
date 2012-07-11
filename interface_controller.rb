@@ -12,6 +12,8 @@ module InterfaceController
   def self.run
     get_craigslist_url
     get_email_details
+    # EmailManager.new(@new_list)
+    # EmailManager.
     # call email manager to email listing owners
     #     - manager writes listings to DB
     display_listings
@@ -40,7 +42,7 @@ module InterfaceController
 
   def self.history
   end
-  
+
 
   def self.get_email_details
     # add logic to verify email has right format

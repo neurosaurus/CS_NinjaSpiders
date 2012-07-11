@@ -34,5 +34,7 @@ module DatabaseInterface
        SQL
   end #end write
 
+## WE SHOULD DELETE OR IGNORE RECORDS OLDER THAN 3 DAYS TO OPTIMIZE SEARCHING
+
 end #end Database
 
