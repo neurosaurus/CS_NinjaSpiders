@@ -1,14 +1,15 @@
 require './listing.rb'
 require './craigslist_query.rb'
+require './email_sender.rb'
 
 class EmailManager
-  include 'email_sender'
+
 
   attr_reader :craigslist_array
 
   def initialize(array)   # Get array from Craigslist_query
     @craigslist_array = array
-    process_emails
+    # process_emails
   end
 
 #  def process_emails
@@ -27,8 +28,8 @@ class EmailManager
 
 
   # if no duplicate
-    EmailSender.send
-    DatabaseInterface.write(listing)
+    # EmailSender.send
+    # DatabaseInterface.write(listing)
     # mark listing as sent
     #write into database (send)
   #else
