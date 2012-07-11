@@ -1,18 +1,21 @@
 require './listing.rb'
 require './craigslist_query.rb'
 require './email_sender.rb'
+require './database.rb'
 
 class EmailManager
 
 
-  attr_reader :craigslist_array
+  attr_reader :craigslist_array, :database_array
 
   def initialize(array)   # Get array from Craigslist_query
     @craigslist_array = array
+    @database_array = DatabaseInterface.read
     # process_emails
   end
 
-#  def process_emails
+ def process_emails
+ end
 # database_array = DatabaseInterface.read
 # Go through each listing in the array and
 # check against the database if listing is a duplicate.

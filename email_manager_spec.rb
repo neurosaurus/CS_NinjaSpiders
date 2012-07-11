@@ -10,6 +10,7 @@ describe "email manager" do
     new_array = []
     new_array << Listing.new("2br/2bath", "url", "felixtsai@yahoo.com", "hi")
     @new_email_manager = EmailManager.new(new_array)
+
   end
 
   it "should create an email manager object" do
@@ -20,6 +21,16 @@ describe "email manager" do
     @new_email_manager.craigslist_array.should be_an_instance_of Array
   end
 
-  it ""
+end
+
+describe "#database array" do
+
+  it "should receive from Database an array of listings" do
+    @new_email_manager.database_array.should be_an_instance_of Array
+  end
+
+  it "should contain an array of Listing objects" do
+    @new_email_manager.database_array[-1].should be_an_instance_of Listing
+  end
 
 end #end describe
