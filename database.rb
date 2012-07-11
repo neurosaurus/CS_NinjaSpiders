@@ -12,12 +12,14 @@ module DatabaseInterface
         url VARCHAR(128) NOT NULL,
         email VARCHAR(64) NOT NULL,
         price VARCHAR(64) NULL,
-        sent_at DATETIME NOT NULL
+        sent_at DATETIME NOT NULL,
+        UNIQUE (url)
       );
     SQL
     # load_from_db
   end
-
+  
+  
   def self.read
     listings = []
     listings_db = SQLite3::Database.open( "listings.db" )
@@ -28,19 +30,18 @@ module DatabaseInterface
     return listings
   end #end read
 
+
   def self.write(listing)
     listings_db = SQLite3::Database.open( "listings.db" )
+    begin
     listings_db.execute <<-SQL
       INSERT INTO listings (title, url, email, price, sent_at)
        VALUES ("#{listing.title}", "#{listing.url}", "#{listing.email}", "#{listing.price}", "#{listing.sent_at}")
        SQL
-  end #end write
-
-  def self.delete_old_posting
-  end
-  
-
-## WE SHOULD DELETE OR IGNORE RECORDS OLDER THAN 3 DAYS TO OPTIMIZE SEARCHING
+    rescue
+      return :fail
+    end
+ end #end write
 
 end #end Database
 

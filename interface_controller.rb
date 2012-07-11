@@ -12,6 +12,7 @@ module InterfaceController
   def self.run
     get_craigslist_url
     get_email_details
+    # call DatabaseInterface.create (include if logic for checking to see if DB exists)
     # EmailManager.new(@new_list)
     # EmailManager.
     # call email manager to email listing owners
