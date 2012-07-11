@@ -23,33 +23,27 @@ class CraigslistQuery
     end #end each
   end #end parse_url
   
-    def title(link_css)
-      # puts link_css.content
-      link_css.content
+  def title(link_css)
+    # puts link_css.content
+    link_css.content
+  end
+  
+  def email_address(email_css)
+    email_address = email_css.children.text
+  end
+  
+  def price(link_css)
+    if link_css.content.scan(/^\$(\s*\d+)/).first == nil 
+      price = nil
+    else
+      price = link_css.content.scan(/^\$(\s*\d+)/).first.first
     end
-    
-    def email_address(email_css)
-      email_address = email_css.children.text
-    end
-    
-    def price(link_css)
-      if link_css.content.scan(/^\$(\s*\d+)/).first == nil 
-        price = nil
-      else
-        price = link_css.content.scan(/^\$(\s*\d+)/).first.first
-      end
-      price
-    end
-    
-    
-    def to_s
-      # "%s\t%s\t%s\t%s" % [query.price, query.url, query.title, query.email]
-      "#{query.price}\t#{query.url}\t#{query.title}\t#{query.email}"
-    end
-      # test for this: if email != nil, then add list object to an array of list objects
-      # call the email function
-      # save to the DB
-      # display the list contacted listings
+    price
+  end
+
+  def to_s
+    "#{query.price}\t#{query.url}\t#{query.title}\t#{query.email}"
+  end
 
 end #end CraigslistQuery
 
