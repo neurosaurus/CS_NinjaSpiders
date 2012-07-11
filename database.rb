@@ -23,7 +23,7 @@ module DatabaseInterface
     listings_db = SQLite3::Database.open( "listings.db" )
     temp_listings = listings_db.execute( "select * from listings" )
     temp_listings.each do |listing_array|
-    listings << Listing.new(listing_array[1], listing_array[2], listing_array[3], listing_array[4], listing_array[5])
+      listings << Listing.new(listing_array[1], listing_array[2], listing_array[3], listing_array[4], listing_array[5])
     end
     return listings
   end #end read
@@ -35,6 +35,10 @@ module DatabaseInterface
        VALUES ("#{listing.title}", "#{listing.url}", "#{listing.email}", "#{listing.price}", "#{listing.sent_at}")
        SQL
   end #end write
+
+  def self.delete_old_posting
+  end
+  
 
 ## WE SHOULD DELETE OR IGNORE RECORDS OLDER THAN 3 DAYS TO OPTIMIZE SEARCHING
 
