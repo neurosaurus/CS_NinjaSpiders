@@ -1,17 +1,32 @@
+require './listing.rb'
+require 'rubygems'
 require 'mail'
-require './craigslist_query.rb'
 
-class EmailInterface
+module EmailSender
 
-  def initialize(array_of_listing_objects)
-    
+  def self.send(array, body)
+    all_listings = array
+    body = body
+    from_email = "lachy@devbootcamp.com"
+    from_name = "Lachy Groom"
+
+    Mail.defaults do
+      delivery_method :sendmail
+    end
+
+    mail = Mail.new do
+      from from_email
+      to email
+    subject 'interested in #{title}'
+      body body
+    end
+    mail.deliver
+    puts mail.to_s
+
+
   end
 
-end
 
-# from_name
-# from_email
-# to_email
-# sent_date
-# email_body
-#
+
+
+end

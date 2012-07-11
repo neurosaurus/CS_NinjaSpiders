@@ -38,7 +38,7 @@ describe "Listing - " do
   describe "displays listing as a string" do
 
     it "displays the listing as a string object" do
-      @listing.to_s.should eq("2Br in the Mission. Going Fast. Call NOW!! ; www.craigslist.com/SDBF@84b12b4bjkbt146812h ; h41034t1304nviu348@craigslist.com ; $440 ; #{@a_designated_time}" )
+      @listing.to_string.should eq("2Br in the Mission. Going Fast. Call NOW!! ; www.craigslist.com/SDBF@84b12b4bjkbt146812h ; h41034t1304nviu348@craigslist.com ; $440 ; #{@a_designated_time}" )
     end
   end
 

@@ -10,12 +10,12 @@ class Listing
     @sent_at      = sent_at
   end
 
-  def to_s
+  def to_string
    "#{@title} ; #{@url} ; #{@email} ; #{@price} ; #{@sent_at}"
   end
 
   def sent!
     @sent_at = Time.now
   end
-  
+
 end
