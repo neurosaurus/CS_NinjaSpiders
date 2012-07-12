@@ -3,8 +3,9 @@ require './listing.rb'
 
 module DatabaseInterface
 
-  def self.create
-    listings_db = SQLite3::Database.new( "listings.db" )
+  def self.create(file_path)
+    @file_path = file_path
+    listings_db = SQLite3::Database.new(@file_path)
     listings_db.execute <<-SQL
       CREATE TABLE IF NOT EXISTS listings (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,11 +19,11 @@ module DatabaseInterface
     SQL
     # load_from_db
   end
-  
-  
+
+
   def self.read
     listings = []
-    listings_db = SQLite3::Database.open( "listings.db" )
+    listings_db = SQLite3::Database.open(@file_path)
     temp_listings = listings_db.execute( "select * from listings" )
     temp_listings.each do |listing_array|
       listings << Listing.new(listing_array[1], listing_array[2], listing_array[3], listing_array[4], listing_array[5])
@@ -32,13 +33,13 @@ module DatabaseInterface
 
 
   def self.write(listing)
-    listings_db = SQLite3::Database.open( "listings.db" )
+    listings_db = SQLite3::Database.open(@file_path)
     begin
     listings_db.execute <<-SQL
       INSERT INTO listings (title, url, email, price, sent_at)
        VALUES ("#{listing.title}", "#{listing.url}", "#{listing.email}", "#{listing.price}", "#{listing.sent_at}")
        SQL
-    rescue
+    rescue SQLite3::ConstraintException
       return :fail
     end
  end #end write

@@ -10,7 +10,7 @@ module InterfaceController
 
   def self.run
     new_list = CraigslistQuery.new(get_craigslist_url)
-    DatabaseInterface.create
+    DatabaseInterface.create("listings.db")
     email_manager = EmailManager.new(new_list.query_list)
     email_manager.process_emails
     display_history
@@ -25,7 +25,7 @@ module InterfaceController
     puts "Fetching and Parsing Craigslist page..."
     return url
   end
-  
+
   # THE SENDER'S EMAIL AND NAME IS CURRENTLY HARDCODED FOR ONE USER
   # def self.get_email_details
   #   # add logic to verify email has right format
