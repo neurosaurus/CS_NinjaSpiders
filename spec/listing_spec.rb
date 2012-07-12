@@ -5,7 +5,13 @@ describe "Listing - " do
   before(:each) do
     @a_designated_time = Time.new
     @parsed_date = @a_designated_time.to_s.split(" ").first
-    @listing = Listing.new("2Br in the Mission. Going Fast. Call NOW!!", "www.craigslist.com/SDBF@84b12b4bjkbt146812h", "h41034t1304nviu348@craigslist.com","$440",@a_designated_time)
+    @listing = Listing.new(
+                      "2Br in the Mission. Going Fast. Call NOW!!", 
+                      "www.craigslist.com/SDBF@84b12b4bjkbt146812h", 
+                      "h41034t1304nviu348@craigslist.com",
+                      "$440",
+                      @a_designated_time
+                      )
   end
 
   describe "initialize" do

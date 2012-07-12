@@ -1,0 +1,7 @@
+source :rubygems
+
+gem 'simplecov'
+gem 'mail'
+gem 'nokogiri'
+gem 'rspec'
+
