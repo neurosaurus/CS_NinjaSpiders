@@ -28,7 +28,7 @@ describe "CraigslistQuery class" do
   it "eliminates listings that have no email address" do
     # has_nil = false
     @new_query.query_list.each do |listing|
-      listing.email.should_not eq nil
+      listing.email.should_not eq ""
     #   if listing.email == nil
     #     has_nil = true
     #   end

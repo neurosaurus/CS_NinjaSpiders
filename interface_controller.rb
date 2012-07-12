@@ -39,7 +39,7 @@ module InterfaceController
     puts "Here's the history of emails sent:"
     listings = DatabaseInterface.read
     listings.each do |listing|
-      puts listing.to_string
+      puts listing.to_string_display
     end
   end
 

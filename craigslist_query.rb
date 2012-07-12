@@ -19,7 +19,7 @@ class CraigslistQuery
       url  = link_css.attr('href')
       posting_doc = Nokogiri::HTML(open(url))
       email_css = posting_doc.css('span.returnemail a')
-      @query_list << Listing.new(title(link_css), url, email_address(email_css), price(link_css)) if email_css
+      @query_list << Listing.new(title(link_css), url, email_address(email_css), price(link_css)) if email_css.children.text != ""
     end #end each
   end #end parse_url
   

@@ -10,9 +10,9 @@ class Listing
     @sent_at      = sent_at
   end
 
-  def to_string
+  def to_string_display
     @sent_at = @sent_at.to_s.split(" ").first   # Clean up the date string
-   "#{@sent_at}\t#{@title}\t#{@url}\t#{@email}\t#{@price} "
+   "#{@sent_at}\t#{@title}\n\t\t#{@url}\t#{@email}"
   end
 
   def sent!
