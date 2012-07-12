@@ -41,10 +41,6 @@ class CraigslistQuery
     price
   end
 
-  def to_s
-    "#{query.price}\t#{query.url}\t#{query.title}\t#{query.email}"
-  end
-
 end #end CraigslistQuery
 
 
