@@ -9,7 +9,7 @@ describe "email manager" do
   before :each do
     @new_array = []
     @new_array << Listing.new("2br/2bath", "url", "felixtsai@yahoo.com", "hi")
-    @new_email_manager = EmailManager.new(new_array)
+    @new_email_manager = EmailManager.new(@new_array)
 
   end #end each
 
@@ -41,10 +41,19 @@ describe "email manager" do
   describe "#process emails" do
 
     it "should not send email if it is a duplicate" do
-      EmailSender.stub(:send).and_return :something
-      DatabaseInterface.stub(:write).and_return :something
+      @new_array << Listing.new("2br/2bath", "url", "jessie", "hi")
+      DatabaseInterface.stub(:write).and_return(:fail)
+      EmailSender.stub(:send).and_return(:something)
       EmailSender.should_not_receive(:send)
-      @new_email_manager.process_email
+      @new_email_manager.process_emails
+    end
+
+    it "should send an email if it is not a duplicate" do
+      @new_array << Listing.new("2br/2bath", "url", "jessie.a.young@gmail.com", "hi")
+      EmailSender.stub(:send).and_return :sent
+      DatabaseInterface.stub(:write).and_return :written
+      EmailSender.should_receive(:send)
+      @new_email_manager.process_emails
     end
 
   end #end describe process emails

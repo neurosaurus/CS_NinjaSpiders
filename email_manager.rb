@@ -15,42 +15,13 @@ class EmailManager
     # process_emails
   end
 
- def process_emails
-   @craigslist_array.each do |listing|
-     #check whether list.url is already in @database_array
-      DatabaseInterface.write(listing)
-      EmailSender.send(listing, body)
-    else
-      #do nothing
-
- end #end process_emails
-
-
-# database_array = DatabaseInterface.read
-# Go through each listing in the array and
-# check against the database if listing is a duplicate.
-  # duplicate is defined as a duplicate URL
-  # don't send an email if the listing is in the DB and
-  # is less than 3 days old
-
-
-
-  # IGNORE THIS EDGE CASE FOR NOW
-  # if there is a listing from an owner that has already recieved an email,
-  # send the alternate email.
-
-
-  # if no duplicate
-    # EmailSender.send
-    # DatabaseInterface.write(listing)
-    # mark listing as sent
-    #write into database (send)
-  #else
-    #don'tsend
-  #display to user what has been sent
-
-
-
+  def process_emails
+    @craigslist_array.each do |listing|
+      if DatabaseInterface.write(listing) != :fail
+        EmailSender.send(listing, @body)
+      end
+    end
+  end #end process_emails
 
 end
 
