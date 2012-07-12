@@ -4,21 +4,15 @@ require 'nokogiri'
 require './listing.rb'
 require './craigslist_query.rb'
 require './database.rb'
-
-# url = ARGV[0] or raise ArgumentError.new("You must supply a search URL")
-
+require './email_manager.rb'
 
 module InterfaceController
 
   def self.run
-    get_craigslist_url
+    new_list = CraigslistQuery.new(get_craigslist_url)
     DatabaseInterface.create
-    # get_email_details
-    # call DatabaseInterface.create (include if logic for checking to see if DB exists)
-    # EmailManager.new(@new_list)
-    # EmailManager.
-    # call email manager to email listing owners
-    #     - manager writes listings to DB
+    email_manager = EmailManager.new(new_list.query_list)
+    email_manager.process_emails
     display_history
     # WHILE LOOP get other commands (ie "history", "new query", "quit")
   end
@@ -27,10 +21,9 @@ module InterfaceController
   def self.get_craigslist_url
     puts "Enter the URL you'd like to crawl: "
     url = gets.chomp!
-    # url = "http://sfbay.craigslist.org/search/roo/sfc?query=&srchType=A&minAsk=500&maxAsk=1050&hasPic=1"
     puts " "
     puts "Fetching and Parsing Craigslist page..."
-    @new_list = CraigslistQuery.new(url)
+    return url
   end
   
   # THE SENDER'S EMAIL AND NAME IS CURRENTLY HARDCODED FOR ONE USER

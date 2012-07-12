@@ -14,7 +14,7 @@ module EmailSender
 
     mail = Mail.new do
          from   from_email
-           to   listing.email
+           to   "felixtsai@yahoo.com"
       subject   "Interested in #{listing.title}"
          body   body
     end
@@ -26,6 +26,3 @@ module EmailSender
 
 end
 
-
-
-EmailSender.send(Listing.new("2br/2bath", "url", "felixtsai@yahoo.com", "hi"), "hi Felix")

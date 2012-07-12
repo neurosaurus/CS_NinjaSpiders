@@ -3,8 +3,8 @@ require './craigslist_query.rb'
 require './email_sender.rb'
 require './database.rb'
 
-class EmailManager
 
+class EmailManager
 
   attr_reader :craigslist_array, :database_array
 
@@ -17,6 +17,7 @@ class EmailManager
 
   def process_emails
     @craigslist_array.each do |listing|
+      listing.sent!
       if DatabaseInterface.write(listing) != :fail
         EmailSender.send(listing, @body)
       end
