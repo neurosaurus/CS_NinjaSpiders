@@ -49,5 +49,17 @@ end
 
 InterfaceController.run
 
+=begin
+  * Change the interfaceController into a class.
+  * Listing Object
+    - email itself?
+    - update database
+    - contact owner
+  * Craigslist Query - what should it return?
+  * Where do the email manager methods go?
+  * Do we get rid of the database interface class?
+  * email history should in the listing class
 
+
+=end
 

@@ -19,4 +19,6 @@ class Listing
     @sent_at = Time.now
   end
 
+
+
 end
