@@ -9,53 +9,51 @@ describe "email manager" do
   before :each do
     @new_array = []
     @new_array << Listing.new("2br/2bath", "url", "felixtsai@yahoo.com", "hi")
-    @new_email_manager = EmailManager.new(@new_array)
+    @new_email_manager = EmailManager.create(@new_array)
 
   end #end each
 
-  describe "#initialize" do
+  describe "#create" do
 
-    it "should create an email manager object" do
-      @new_email_manager.should be_an_instance_of EmailManager
-    end
+   it "should take an argument" do
+     expect {
+       EmailManager.create("array or something")
+     }.should_not raise_error(ArgumentError)
+   end
 
-    it "should take in an array of Listing objects" do
-      @new_email_manager.craigslist_array.should be_an_instance_of Array
-    end
+  end
 
-  end #end describe initialize
-
-
-  describe "#database array" do
-
-    it "should receive from Database an array of listings" do
-      @new_email_manager.database_array.should be_an_instance_of Array
-    end
-
-    it "should contain an array of Listing objects" do
-      @new_email_manager.database_array[-1].should be_an_instance_of Listing
-    end
-
-  end #end describe database array
 
   describe "#process emails" do
 
     it "should not send email if it is a duplicate" do
       @new_array << Listing.new("2br/2bath", "url", "jessie", "hi")
       DatabaseInterface.stub(:write).and_return(:fail)
-      EmailSender.stub(:send).and_return(:something)
-      EmailSender.should_not_receive(:send)
-      @new_email_manager.process_emails
+      EmailManager.stub(:send).and_return(:something)
+      EmailManager.should_not_receive(:send)
+      EmailManager.process_emails
     end
 
     it "should send an email if it is not a duplicate" do
       @new_array << Listing.new("2br/2bath", "url", "jessie.a.young@gmail.com", "hi")
-      EmailSender.stub(:send).and_return :sent
+      EmailManager.stub(:send).and_return :sent
       DatabaseInterface.stub(:write).and_return :written
-      EmailSender.should_receive(:send)
-      @new_email_manager.process_emails
+      EmailManager.should_receive(:send)
+      EmailManager.process_emails
     end
 
-  end #end describe process emails
+  end #end describe process def emails
+
+  describe "email sender" do
+
+    before(:each) do
+      @email_sender = EmailManager.send(Listing.new("title","url","email","somethingelse"), "Hi email, I'm interested in title. Let's talk." )
+    end
+
+    it "should send out an email" do
+      @email_sender.should eq(:success)
+    end
+
+  end
 
 end #end describe email manager
