@@ -40,6 +40,20 @@ class CraigslistQuery
     end
     price
   end
+  
+    
+  end
+  
+  
+
+  def check_duplicates_write_database_send_email
+    @craigslist_array.each do |listing|
+      listing.sent!
+      if DatabaseInterface.write(listing) != :fail
+        EmailManager.send(listing, @body)
+      end
+    end
+  end #end process_emails
 
 end #end CraigslistQuery
 
