@@ -3,14 +3,13 @@ require_relative '../lib/listing.rb'
 describe "Listing - " do
 
   before(:each) do
-    @a_designated_time = Time.new
-    @parsed_date = @a_designated_time.to_s.split(" ").first
+    @new_time = Time.new.to_s.split(" ").first
     @listing = Listing.new(
                       "2Br in the Mission. Going Fast. Call NOW!!", 
                       "www.craigslist.com/SDBF@84b12b4bjkbt146812h", 
                       "h41034t1304nviu348@craigslist.com",
                       "$440",
-                      @a_designated_time
+                      @new_time
                       )
   end
 
@@ -37,7 +36,7 @@ describe "Listing - " do
     end
 
     it "should initialize with what time it was sent at" do
-      @listing.sent_at.should eq(@a_designated_time)
+      @listing.sent_at.should eq(@new_time)
     end
 
   end
